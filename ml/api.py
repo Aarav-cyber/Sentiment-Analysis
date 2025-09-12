@@ -3,11 +3,17 @@ from flask_cors import CORS
 import joblib
 
 # Load model and vectorizer
-model = joblib.load("sentiment_model.joblib")
-vectorizer = joblib.load("vectorizer.joblib")
+vectorizer = joblib.load(r"C:\Python\Sentiment Analysis\ml\vectorizer.joblib")
+model = joblib.load(r"C:\Python\Sentiment Analysis\ml\sentiment_model.joblib")
+
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"message": "Flask API is running!"})
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
